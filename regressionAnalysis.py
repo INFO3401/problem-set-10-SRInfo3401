@@ -1,6 +1,6 @@
 #Monday:
 #Submit the following functions as part of a file called regressionAnalysis.py. You will use this data to make some predictions about the nutritional aspects of various popular Halloween candies. Your code will contain three objects:
-#sources: http://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html/https://dziganto.github.io/classes/data%20science/linear%20regression/machine%20learning/object-oriented%20programming/python/Understanding-Object-Oriented-Programming-Through-Machine-Learning/
+#sources: http://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html/https://dziganto.github.io/classes/data%20science/linear%20regression/machine%20learning/object-oriented%20programming/python/Understanding-Object-Oriented-Programming-Through-Machine-Learning/ https://pypi.org/project/val/
 
 import csv
 import pandas as pd
@@ -50,7 +50,7 @@ class LinearAnalysis:
 #Print the variable name and the resulting fit (use LaTeX: R^2 R 2  to report the fit). Make sure your best predictor is NOT the same as the targetY variable.
         
     def runSimpleAnalysis(self, data):
-        top_sugar_variable = ""
+        top_sugar_variable = data.dataset
         top_r2 = -1
         
         for column in data.variables:
@@ -76,15 +76,23 @@ class LinearAnalysis:
 #LogisticAnalysis object = predict whether or not the candy is chocolate.
 #Part 2(incorporation)Create the same function for LogisticAnalysis.
 
+
+
+
+
+
+#(11/7/18)
+#PROBLEM SET 10
+#Monday PROBLEM SET 10 (11/7/18)
+
 class LogisticAnalysis:
     def __init__(self, data_targetY):
         self.bestX = ""
         self.targetY = data_targetY
-        self.fit = ""
-        
+        self.fit = -1
         
     def runSimpleAnalysis1(self, data):
-        top_sugar_variable = ""
+        top_sugar_variable = data.dataset
         top_r2 = -1
         
         for column in data.variables:
@@ -102,24 +110,76 @@ class LogisticAnalysis:
         self.bestX = top_sugar_variable
         print(top_sugar_variable, top_r2)
         
+#2 Problem        
+    def runMultipleRegression(self, data):
+        #for val in data.dataset.columns.values:
+            #if val != "competitorname":
+                #data_variable = data.dataset[column].values
+                #data_variable = data_variable.reshape(len(data_variable),1)
+                #self.variables.append(val)
+            multi_regr = LogisticRegression()
+            mp_r = [val for val in data.variables if val != self.targetY]
+            multi_regr.fit(data.dataset[mp_r], data.dataset[self.targetY])
 
-#1. Using the candy-data.csv file in the repo, populate an AnalysisData object that will hold the data you'll use for today's problem set. You should read in the data from the CSV, store the data in the dataset variable, and initialize the xs (in your variables attribute) and targetY variables appropriately. targetY should reference the variable describing whether or not a candy is chocolate.
-#code from class
-#dataParser = Parser("csv")
-#dataParser.parseFile("candy-data.csv")
-#print(dataParser.data)
+            variable_prediction = multi_regr.predict(data.dataset[mp_r])
+            r_score = r2_score(data.dataset[self.targetY],variable_prediction)
+            #if r_score > top_r2:
+                #top_r2 = r_score
+                #top_sugar_variable = column
+        #self.bestX = top_sugar_variable
+            print("fruity", r_score)
+            
+        
+#Monday & Wednesday:
+#1. Add a function to the LogisticAnalysis object called runSimpleAnalysis. This function should take in an AnalysisData object as a parameter and should use this object to compute which variable best predicts whether or not a candy is chocolate using logistic regression. Print the variable name and the resulting fit. Do the two functions find the same optimal variable? Which method best fits this data? Make sure your best predictor is NOT the same as the targetY variable.
+
+#(1 TEXT ANSWERS!!) The two functioncs do not find the same optimal varaibale. When running the simple analysis on the linear data it finds the optimal variable is "Price Percent at 0.10870." While running the simple analysis on logistic data the best variable results in "Fruity at 0.55015" The logistic regression method output of .55015 confirms it is best to use when fitting this particular data.
 
 candy_analysis = AnalysisData()
-candy_analysis.parserFile('candy-data.csv')
+candy_analysis.parserFile("candy-data.csv")
 
-#2. Create a function to initialize a LinearAnalysis object that takes a targetY as its input parameter. Create the same function for LogisticAnalysis. Note that you will use the LinearAnalysis object to try to predict the amount of sugar in the candy and the LogisticAnalysis object to predict whether or not the candy is chocolate.
-#(incorporated into problem set)
-
-
-#Wednesday & Friday:
-
-#3. Add a function to the LinearAnalysis object called runSimpleAnalysis. This function should take in an AnalysisData object as a parameter and should use this object to compute which variable best predicts how much sugar a candy contains using a linear regression. Print the variable name and the resulting fit (use LaTeX: R^2 R 2  to report the fit). Make sure your best predictor is NOT the same as the targetY variable.
-#(incorporated into problem set)
-
-candy_data_analysis = LinearAnalysis('sugarpercent')
+#Linear Analysis(Problem Set 9)
+candy_data_analysis = LinearAnalysis("sugarpercent")
 candy_data_analysis.runSimpleAnalysis(candy_analysis)
+#Logistic Analysis(Problem Set 10)
+candy_data_analysis = LogisticAnalysis("chocolate")
+candy_data_analysis.runSimpleAnalysis1(candy_analysis)
+
+
+#2. Add a function to the LogisticAnalysis object called runMultipleRegression. This function should take in an AnalysisData object as a parameter and should use this object to compute a multiple logistic regression using all of the possible independent variables in your dataset to predict whether or not a candy is chocolate (note, you should not use your dependent variable as an independent variable). Print the variable name and resulting fit. In your testing code, create a new LogisticAnalysis object and use it to run this function on your candy data. Compare the outcomes of this and the simple logistic analysis. Which model best fits the data? Why?
+
+candy_data_analysis = LogisticAnalysis("chocolate")
+candy_data_analysis.runMultipleRegression(candy_analysis)
+
+#(2 TEXT ANSWERS!!) When comapring the outcomes of the simple logtistic analysis and multiple regression analysis you can clearly see multiple analysis model outperforms simple analysis. You can varify this through the more percice fit by the multiple analysis output value of .76069. The multiple logistic analysis will always outperform simple because the model can now utilize all the data at once instead of running step by step in variables and columns like simple analysis. Having access to a larger porportion of data within a dataset allows multiple analysis to find a more accurate fit for the regresoin output.
+
+
+#Wednesday:
+
+#3. Write the equations for your linear, logistic, and multiple logistic regressions. Hint: Use the equations from the slides from Monday's lecture to work out what a logistic regression equation might look like. The coef_ and intercept_ attributes of your regression object will help a lot here!
+
+
+
+
+
+#FRIDAY:
+#PROBLEM SET 10 - PART 4(ANSWERS BELOW)
+
+#4. Identify the independent variable(s) and its type (e.g., categorical, continuous, or discrete), the dependent variable and its type, and the null hypothesis for each of the following scenarios: 
+
+#(a) What candies contain more sugar, those with caramel or those with chocolate?
+
+#(a-answer)The independed variable is all the different types of candies, which is a categorical type. The dependent variable would be sugar percent, which is a continious type.
+
+#(a-answer) Null hyptohesis would tell us candies with caramel has the same amout of sugar as candies of chocolate. Meaning that there is no significance differnece between sugar percent and the type of candy being chocolate or caramel. Not good variables to use.
+
+
+#(b) Are there more split ticket voters in blue states or red states? 
+
+#(b-answer)
+
+#(c) Do phones with longer battery life sell at a higher or lower rate than other phones?
+
+
+
+ 
