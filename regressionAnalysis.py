@@ -128,7 +128,8 @@ class LogisticAnalysis:
                 #top_sugar_variable = column
         #self.bestX = top_sugar_variable
             print("fruity", r_score)
-            
+            print('Multiple Regression Analysis coefficients: ', multi_regr.coef_)
+            print('Multiple Regression Analysis intercept: ', multi_regr.intercept_)
         
 #Monday & Wednesday:
 #1. Add a function to the LogisticAnalysis object called runSimpleAnalysis. This function should take in an AnalysisData object as a parameter and should use this object to compute which variable best predicts whether or not a candy is chocolate using logistic regression. Print the variable name and the resulting fit. Do the two functions find the same optimal variable? Which method best fits this data? Make sure your best predictor is NOT the same as the targetY variable.
@@ -158,6 +159,13 @@ candy_data_analysis.runMultipleRegression(candy_analysis)
 
 #3. Write the equations for your linear, logistic, and multiple logistic regressions. Hint: Use the equations from the slides from Monday's lecture to work out what a logistic regression equation might look like. The coef_ and intercept_ attributes of your regression object will help a lot here!
 
+#Output reference Below
+#pricepercent 0.108706302017
+#fruity 0.550150129132
+#fruity 0.760698198198
+#Multiple Regression Analysis coefficients:  [[-2.52858047 -0.19697876  0.03940308 -0.16539952  0.49783674 -0.47591613 0.81511886 -0.59971553 -0.2581028   0.3224988   0.05387906]]
+#Multiple Regression Analysis intercept:  [-1.68260553]
+
 
 
 
@@ -169,17 +177,21 @@ candy_data_analysis.runMultipleRegression(candy_analysis)
 
 #(a) What candies contain more sugar, those with caramel or those with chocolate?
 
-#(a-answer)The independed variable is all the different types of candies, which is a categorical type. The dependent variable would be sugar percent, which is a continious type.
+#(a-answer)The independent variable is all the different types of candies, which is a categorical type. The dependent variable would be sugar percent, which is a continious type.
 
 #(a-answer) Null hyptohesis would tell us candies with caramel has the same amout of sugar as candies of chocolate. Meaning that there is no significance differnece between sugar percent and the type of candy being chocolate or caramel. Not good variables to use.
 
 
 #(b) Are there more split ticket voters in blue states or red states? 
 
-#(b-answer)
+#(b-answer) The independent variables are either blue or red states, which is a categorical type. The dependent variable would be the split ticket voters, which is a continious type.
+
+#(b-answer) Null hyptohesis would tell us that red states have the same amout of split ticket voters as blue states.
+
 
 #(c) Do phones with longer battery life sell at a higher or lower rate than other phones?
 
+#(c-answer) The independent variable is the duration of phone battery life, which is a continious type. The dependent variable is the different phone sales rates, which is a continious type. 
 
-
+#(c-answer) Null hyptohesis would tell us that phones with short or long battery life durations will have the same phone sales rates.
  
