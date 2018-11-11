@@ -69,12 +69,16 @@ class LinearAnalysis:
                     top_sugar_variable = column
         self.bestX = top_sugar_variable
         print(top_sugar_variable, top_r2)
+        print('Linear Regression Analysis coefficients: ', regr.coef_)
+        print('Linear Regression Analysis intercept: ', regr.intercept_)
         
 
 #Part (c) - LogisticAnalysis, which will contain your functions for doing logistic regression and have at a minimum attributes called bestX (which holds the best X predictor for your data), targetY (which holds the index to the target dependent variable), and fit (which will hold how well bestX predicts your target variable).
 #LogisticAnalysis-bestx(holds best X predictor for data)/targetY(hold the index to target dependent variable)/fit (hold how well bestX predicts target variable)
 #LogisticAnalysis object = predict whether or not the candy is chocolate.
 #Part 2(incorporation)Create the same function for LogisticAnalysis.
+
+
 
 
 
@@ -109,6 +113,8 @@ class LogisticAnalysis:
                     top_sugar_variable = column
         self.bestX = top_sugar_variable
         print(top_sugar_variable, top_r2)
+        print('Simple Logistic Regression Analysis coefficients: ', regr.coef_)
+        print('Simple Logistic Regression Analysis intercept: ', regr.intercept_)
         
 #2 Problem        
     def runMultipleRegression(self, data):
@@ -157,16 +163,31 @@ candy_data_analysis.runMultipleRegression(candy_analysis)
 
 #Wednesday:
 
-#3. Write the equations for your linear, logistic, and multiple logistic regressions. Hint: Use the equations from the slides from Monday's lecture to work out what a logistic regression equation might look like. The coef_ and intercept_ attributes of your regression object will help a lot here!
+#3. Write the equations for your linear, logistic, and multiple logistic regressions. Hint: Use the equations from the slides from Monday's lecture to work out what a logistic regression equation might look like. The coef_ and intercept_ attributes of your regression object will help a lot here!(ref:video 22 7:55)
 
-#Output reference Below
+#Linear Regression y = b0 + b1x
+#Logistic Regression p = 1/1+e^-(b0+b1x)
+#Multiple Regression p = 1/1+e^-(b0+b1x+b2x+b3x+....b11x)
+
+#(Answer-Linear Regression Equation) y = 0.257063291665 + 0.00440378
+
+#(Answer-Logistic Regression Equation) p = 1/1+e^-(-0.650265328323 + 0.02157451x)
+
+#(Answer-Multiple Regression Equation) p = 1/1+e^-(-1.68260553 + -2.52858047 + -0.19697876 + 0.03940308 -0.16539952 + 0.49783674 + -0.47591613 0.81511886 + -0.59971553 + -0.2581028 + 0.3224988 + 0.05387906)
+
+
+#Output Reference
 #pricepercent 0.108706302017
+#Linear Regression Analysis coefficients:  [0.00440378]
+#Linear Regression Analysis intercept:  0.257063291665
+
 #fruity 0.550150129132
+#Simple Logistic Regression Analysis coefficients:  [ 0.02157451]
+#Simple Logistic Regression Analysis intercept:  -0.650265328323
+
 #fruity 0.760698198198
 #Multiple Regression Analysis coefficients:  [[-2.52858047 -0.19697876  0.03940308 -0.16539952  0.49783674 -0.47591613 0.81511886 -0.59971553 -0.2581028   0.3224988   0.05387906]]
 #Multiple Regression Analysis intercept:  [-1.68260553]
-
-
 
 
 
